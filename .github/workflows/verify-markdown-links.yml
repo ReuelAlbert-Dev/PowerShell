@@ -18,6 +18,7 @@ on:
 
 jobs:
   verify-markdown-links:
+    timeout-minutes: 10  # Prevents hanging workflows
     name: Verify Markdown Links
     runs-on: ubuntu-latest
     steps:
@@ -30,3 +31,9 @@ jobs:
         with:
           timeout-sec: 30
           maximum-retry-count: 2
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+              path: ~/.cache
+              key: markdown-links-${{ runner.os }}
